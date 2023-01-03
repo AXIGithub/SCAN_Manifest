@@ -26,7 +26,7 @@ public class Connector {
     
     public void setStatement() {
         try {
-            koneksi = DriverManager.getConnection("jdbc:mysql://localhost/db_mrd_validation?autoReconnect=true&failOverReadonly=false&maxReconnects=1000", "root", "");
+            koneksi = DriverManager.getConnection("jdbc:mysql://localhost/db_scan_manifest?autoReconnect=true&failOverReadonly=false&maxReconnects=1000", "root", "");
             stmt = koneksi.createStatement();
         }
        catch (SQLException ex) {

@@ -5,11 +5,23 @@
  */
 package scan_manifest;
 
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import scan_manifest.controller.FileChooser;
+
 /**
  *
  * @author Ratino
  */
 public class MainFrame extends javax.swing.JFrame {
+    
+    private FileChooser opn = new FileChooser();
+    private String inputDirectory = new String();
+    private String fileName = new String();
 
     /**
      * Creates new form mainFreame
@@ -42,8 +54,20 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTextField1.setText("jTextField1");
+        jTextField1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTextField1InputMethodTextChanged(evt);
+            }
+        });
 
         jButton1.setText("BROWSE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("jLabel1");
 
@@ -143,6 +167,33 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            // TODO add your handling code here:
+
+            inputDirectory = opn.getDirectory();
+            fileName = opn.getFileName();
+            jLabel1.setText(fileName);
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextField1InputMethodTextChanged
+        // TODO add your handling code here:
+        jTextField1.addActionListener(action );
+        jTextArea1.setText(fileName);
+    }//GEN-LAST:event_jTextField1InputMethodTextChanged
+
+    Action action = new AbstractAction()
+{
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        System.out.println("some action");
+    }
+};
     /**
      * @param args the command line arguments
      */
