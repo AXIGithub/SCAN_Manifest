@@ -207,7 +207,6 @@ public class MainFrame extends javax.swing.JFrame {
             jLabel1.setText(fileName);
             jTextField1.setText("");
             jButton1.setEnabled(false);
-            jTextField1 textField = new JTextField
             jTextField1.setEditable(true);
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
