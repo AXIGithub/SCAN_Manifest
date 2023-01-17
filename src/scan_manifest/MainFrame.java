@@ -22,6 +22,7 @@ public class MainFrame extends javax.swing.JFrame {
     private FileChooser opn = new FileChooser();
     private String inputDirectory = new String();
     private String fileName = new String();
+    private String getTextfiled = new String();
 
     /**
      * Creates new form mainFreame
@@ -224,8 +225,19 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         jTextArea1.setText(jTextField1.getText());
         
+        getTextfiled = jTextField1.getText();
+        
+        
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    public void process(){
+        getTextfiled = jTextField1.getText();
+        
+    }
+    
+    
+    
     private void jButton2_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2_resetActionPerformed
         // TODO add your handling code here:
         jButton1.setEnabled(true);

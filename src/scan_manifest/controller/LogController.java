@@ -9,6 +9,8 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import scan_manifest.model.LogModel;
 
 /**
@@ -37,6 +39,18 @@ public class LogController {
     
     public void insertToDatabase(String url){
         
+        log = new LogModel(stmt);
+        log.insertToDatabase(stmt, url);
+//        try {
+//            stmt.executeUpdate("LOAD DATA INFILE '"+url+"; INTO TABLE ");
+//        } catch (SQLException ex) {
+//            Logger.getLogger(LogController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }
+    
+    public void selectTable(String barcode){
+        log = new LogModel(stmt);
+        log.selectTableBarcode(stmt, barcode);
     }
     
     
