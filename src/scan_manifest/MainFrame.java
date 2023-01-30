@@ -6,12 +6,15 @@
 package scan_manifest;
 
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import scan_manifest.controller.FileChooser;
+import scan_manifest.controller.PathDirectory;
+import scan_manifest.controller.ScanProcessController;
 
 /**
  *
@@ -23,13 +26,18 @@ public class MainFrame extends javax.swing.JFrame {
     private String inputDirectory = new String();
     private String fileName = new String();
     private String getTextfiled = new String();
+    private String currentDirectory = new String();    
+    private String outputDirectory = new String();
+    ScanProcessController sc;
 
     /**
      * Creates new form mainFreame
      */
-    public MainFrame() {
+    public MainFrame() throws IOException {
         initComponents();
         jButton2_reset.setEnabled(false);
+        setCurrentDirectory(""+ new java.io.File(".").getCanonicalPath());
+        createFolder();
     }
 
     /**
@@ -233,6 +241,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void process(){
         getTextfiled = jTextField1.getText();
+        sc.scanProcessManifest(fileName, getTextfiled, fileName);
+        
         
     }
     
@@ -250,6 +260,23 @@ public class MainFrame extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton3_exitActionPerformed
 
+    public void setCurrentDirectory(String currentdirectory){
+        PathDirectory pd = new PathDirectory();
+        this.currentDirectory = currentdirectory;
+        inputDirectory = pd.configurePath(currentdirectory + "\\" + "INPUT\\");
+        outputDirectory = pd.configurePath(currentdirectory + "\\" + "OUTPUT\\");
+    }
+    
+    
+    public void createFolder(){
+        File f1 = new File(inputDirectory);
+        f1.mkdir();
+        
+        File f2 = new File(outputDirectory);
+        f2.mkdir();
+    }
+    
+    
     Action action = new AbstractAction()
 {
     @Override
@@ -289,7 +316,11 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                try {
+                    new MainFrame().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

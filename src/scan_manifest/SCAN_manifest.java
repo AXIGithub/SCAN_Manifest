@@ -5,6 +5,9 @@
  */
 package scan_manifest;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -17,9 +20,13 @@ public class SCAN_manifest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-       // MainFrame mainfream = new MainFrame();
-        new MainFrame().setVisible(true);
+        try {
+            // TODO code application logic here
+            // MainFrame mainfream = new MainFrame();
+            new MainFrame().setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(SCAN_manifest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     

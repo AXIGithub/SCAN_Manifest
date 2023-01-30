@@ -22,9 +22,12 @@ public class LogModel extends Connector{
     protected Connection koneksi;
     protected Statement stmt;
     
-    private ArrayList<String>customer            = new ArrayList<String>(10);
-    private ArrayList<Integer>noUrut            = new ArrayList<Integer>(10);
-    private ArrayList<Integer>seqAmp            = new ArrayList<Integer>(10);
+    private ArrayList<Integer>idManifest = new ArrayList<Integer>(10);
+    private ArrayList<String>customer   = new ArrayList<String>(10);
+    private ArrayList<Integer>noUrut    = new ArrayList<Integer>(10);
+    private ArrayList<Integer>seqAmp    = new ArrayList<Integer>(10);
+    private ArrayList<Integer>nopolis    = new ArrayList<Integer>(10);
+    private ArrayList<String>barcodeManifest    = new ArrayList<String>(10);
     
     
     
@@ -59,12 +62,70 @@ public class LogModel extends Connector{
             hasilQuery = stmt.executeQuery("SELECT * FROM t_manifest WHERE barcode_manifest '"+barcode+"'");
             
             while(hasilQuery.next()){
-                
+                idManifest.add(hasilQuery.getInt("id"));
+                customer.add(hasilQuery.getString("customer"));
+                noUrut.add(hasilQuery.getInt("no_urut"));
+                seqAmp.add(hasilQuery.getInt("seq_amp"));
+                nopolis.add(hasilQuery.getInt("nopolis"));
+                barcodeManifest.add(hasilQuery.getString("barcode_manifest"));
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(LogModel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
     }
+
+    public ArrayList<Integer> getIdManifest() {
+        return idManifest;
+    }
+
+    public void setIdManifest(ArrayList<Integer> idManifest) {
+        this.idManifest = idManifest;
+    }
+
+    public ArrayList<String> getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(ArrayList<String> customer) {
+        this.customer = customer;
+    }
+
+    public ArrayList<Integer> getNoUrut() {
+        return noUrut;
+    }
+
+    public void setNoUrut(ArrayList<Integer> noUrut) {
+        this.noUrut = noUrut;
+    }
+
+    public ArrayList<Integer> getSeqAmp() {
+        return seqAmp;
+    }
+
+    public void setSeqAmp(ArrayList<Integer> seqAmp) {
+        this.seqAmp = seqAmp;
+    }
+
+    public ArrayList<Integer> getNopolis() {
+        return nopolis;
+    }
+
+    public void setNopolis(ArrayList<Integer> nopolis) {
+        this.nopolis = nopolis;
+    }
+
+    public ArrayList<String> getBarcodeManifest() {
+        return barcodeManifest;
+    }
+
+    public void setBarcodeManifest(ArrayList<String> barcodeManifest) {
+        this.barcodeManifest = barcodeManifest;
+    }
+    
+    
+    
     
 }
