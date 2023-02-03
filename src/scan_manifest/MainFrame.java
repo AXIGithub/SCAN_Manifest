@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import scan_manifest.controller.FileChooser;
+import scan_manifest.controller.LogController;
 import scan_manifest.controller.PathDirectory;
 import scan_manifest.controller.ScanProcessController;
 
@@ -209,7 +210,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            // TODO add your handling code here:
+            // TODO add your handling code here:                       
 
             inputDirectory = opn.getDirectory();
             fileName = opn.getFileName();
@@ -217,6 +218,10 @@ public class MainFrame extends javax.swing.JFrame {
             jTextField1.setText("");
             jButton1.setEnabled(false);
             jTextField1.setEditable(true);
+            
+            LogController logController = new LogController();
+            logController.createTable();
+            logController.insertToDatabase(inputDirectory+fileName);
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }

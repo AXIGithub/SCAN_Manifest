@@ -18,11 +18,16 @@ public class ScanProcessController {
     private LogModel log;
     
     
+       
     
     public void scanProcessManifest(String dirInput, String barcode, String logFile){
         
         log = new LogModel(stmt);
         log.selectTableBarcode(stmt, barcode);
+        
+        for(int i=0; i<log.getIdManifest().size(); i++) {
+            System.out.println("Barcode : " + log.getBarcodeManifest().get(i));
+        }
     }
     
     
